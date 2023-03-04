@@ -31,6 +31,13 @@ public class DomainModelTest {
         assertEquals("123 Main Street", bar.getLocation());
     }
 
+
+    @Test
+    public void testStrangerBringGirl() {
+        stranger.bringGirl(girl);
+        assertEquals(girl, stranger.getGirl());
+    }
+
     @Test
     public void testStrangerLaughLoudly() {
         stranger.laughLoudly();
