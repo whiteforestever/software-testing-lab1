@@ -1,48 +1,53 @@
-//package domainModelTest;
-//
-//import org.junit.jupiter.api.Test;
-//
-//import static org.junit.jupiter.api.Assertions.*;
-//
-//public class DomainModelTest {
-//
-//    @Test
-//    public void testPerson() {
-//        DomeinModel.Person person = new DomeinModel.Person("John", 25, "Male", "Happy");
-//        assertEquals("John", person.getName());
-//        assertEquals(25, person.getAge());
-//        assertEquals("Male", person.getGender());
-//        assertEquals("Happy", person.getMood());
-//        person.laugh();
-//        person.silent();
-//    }
-//
-//    @Test
-//    public void testGirl() {
-//        Girl girl = new Girl("Emily", 22, "Female", "Angry");
-//        assertEquals("Emily", girl.getName());
-//        assertEquals(22, girl.getAge());
-//        assertEquals("Female", girl.getGender());
-//        assertEquals("Angry", girl.getMood());
-//        girl.hate();
-//        girl.payAttention();
-//        girl.evaporate();
-//    }
-//
-//    @Test
-//    public void testBar() {
-//        Bar bar = new Bar("The Green Dragon", "123 Main St.");
-//        assertEquals("The Green Dragon", bar.getName());
-//        assertEquals("123 Main St.", bar.getLocation());
-//        bar.open();
-//        bar.close();
-//    }
-//
-//    @Test
-//    public void testMoment() {
-//        Moment moment = new Moment(60);
-//        assertEquals(60, moment.getDuration());
-//        moment.arrive();
-//    }
-//
-//}
+package domainModelTest;
+
+import domainModel.*;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class DomainModelTest {
+
+    Girl girl = new Girl("Kate Johnson", 25, Gender.FEMALE);
+    Stranger stranger = new Stranger("Dim Dimich", 14, Gender.MALE);
+    Bar bar = new Bar("The Golden Owl", "123 Main Street");
+
+    @Test
+    public void testGirlInitialization() {
+        assertEquals("Kate Johnson", girl.getName());
+        assertEquals(25, girl.getAge());
+        assertEquals(Gender.FEMALE, girl.getGender());
+    }
+
+    @Test
+    public void testStrangerInitialization() {
+        assertEquals("Dim Dimich", stranger.getName());
+        assertEquals(14, stranger.getAge());
+        assertEquals(Gender.MALE, stranger.getGender());
+    }
+
+    @Test
+    public void testBarInitialization() {
+        assertEquals("The Golden Owl", bar.getName());
+        assertEquals("123 Main Street", bar.getLocation());
+    }
+
+    @Test
+    public void testStrangerLaughLoudly() {
+        stranger.laughLoudly();
+        assertTrue(stranger.isLaughing());
+    }
+
+    @Test
+    public void testGirlHatesGuy() {
+        girl.hatesGuy(stranger);
+        assertTrue(girl.isHatingSomeone());
+    }
+
+    @Test
+    public void testStrangerTransformToCloud(){
+        Cloud cloud = stranger.transformToCloud();
+        assertEquals(cloud.getFromWhom(), stranger);
+    }
+
+}
+
