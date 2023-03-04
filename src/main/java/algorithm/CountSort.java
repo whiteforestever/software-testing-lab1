@@ -2,59 +2,110 @@ package algorithm;
 
 public class CountSort {
     private int[] array;
+    private int minVal;
+    private int maxVal;
+    private int[] countArray;
+    private int[] sortedArray;
 
     public CountSort(int[] values) {
         array = values.clone();
     }
 
-    public static void countSort(int[] arr) {
-        if (arr.length == 0) {
+    public  void countSort() {
+        if (array.length == 0) {
             return;
         }
 
-        // Find the minimum and maximum values in the array
-        int minVal = arr[0];
-        int maxVal = arr[0];
-        for (int num : arr) {
+        // Find min and max values in the array
+        findMinMax();
+
+        // Shift all the values so that the minimum value becomes zero
+        shiftArray();
+
+        // Count the occurrences of each value
+        calculateCountArray();
+
+        // Modify the count array to store the running sum
+        modifyCountArray();
+
+        // Build the sorted array
+        buildSortedArray();
+
+        // Shift all the values back to their original range
+        shiftBack();
+
+        // Copy the sorted array back to the input array
+        copy();
+    }
+
+    public void findMinMax() {
+        minVal = array[0];
+        maxVal = array[0];
+        for (int num : array) {
             if (num < minVal) {
                 minVal = num;
             } else if (num > maxVal) {
                 maxVal = num;
             }
         }
+    }
 
-        // Shift all the values so that the minimum value becomes zero
-        int shift = -minVal;
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] += shift;
+    public void shiftArray() {
+        for (int i = 0; i < array.length; i++) {
+            array[i] = array[i] - minVal;
         }
+    }
 
-        // Count the occurrences of each value
-        int[] count = new int[maxVal + shift + 1];
-        for (int num : arr) {
-            count[num]++;
+    public void calculateCountArray() {
+        countArray = new int[maxVal - minVal + 1];
+        for (int num : array) {
+            countArray[num]++;
         }
+    }
 
-        // Modify the count array to store the running sum
-        for (int i = 1; i < count.length; i++) {
-            count[i] += count[i - 1];
+    public void modifyCountArray() {
+        for (int i = 1; i < countArray.length; i++) {
+            countArray[i] += countArray[i - 1];
         }
+    }
 
-        // Build the sorted array
-        int[] sortedArr = new int[arr.length];
-        for (int i = arr.length - 1; i >= 0; i--) {
-            int num = arr[i];
-            int index = count[num] - 1;
-            sortedArr[index] = num;
-            count[num]--;
+    public void buildSortedArray() {
+        sortedArray = new int[array.length];
+        for (int i = array.length - 1; i >= 0; i--) {
+            int num = array[i];
+            int index = countArray[num] - 1;
+            sortedArray[index] = num;
+            countArray[num]--;
         }
+    }
 
-        // Shift all the values back to their original range
-        for (int i = 0; i < sortedArr.length; i++) {
-            sortedArr[i] -= shift;
+    public void shiftBack() {
+        for (int i = 0; i < sortedArray.length; i++) {
+            sortedArray[i] += minVal;
         }
+    }
 
-        // Copy the sorted array back to the input array
-        System.arraycopy(sortedArr, 0, arr, 0, arr.length);
+    public void copy() {
+        System.arraycopy(sortedArray, 0, array, 0, array.length);
+    }
+
+    public int[] getArray() {
+        return array;
+    }
+
+    public int getMin() {
+        return minVal;
+    }
+
+    public int getMax() {
+        return maxVal;
+    }
+
+    public int[] getCountArray() {
+        return countArray;
+    }
+
+    public int[] getSortedArray() {
+        return sortedArray;
     }
 }
