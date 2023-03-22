@@ -6,7 +6,7 @@
 
 - Функция `sin(x)`
 
-![img.png](img.png)
+![sin_decomposition.png](sin_decomposition.png)
 
 - Программный модуль для `сортировки массива подсчетом` (http://www.cs.usfca.edu/~galles/visualization/CountingSort.html)
 - Описание предметной области:

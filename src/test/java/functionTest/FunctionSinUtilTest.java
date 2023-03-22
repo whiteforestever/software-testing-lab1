@@ -8,9 +8,6 @@ import function.FunctionSinUtil;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class FunctionSinUtilTest {
 
     // sin(0)

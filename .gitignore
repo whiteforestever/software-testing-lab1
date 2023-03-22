@@ -1,6 +1,7 @@
 .idea
-/target
+target/
 .fleet
+теория_лаб1.docx
 
 # Compiled class file
 *.class
